@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Counter Component should render correctly 1`] = `
+"<Counter count={5}>
+  <div className=\\"Counter\\">
+    <h2>
+      Voc� tem 
+      5
+       counters;
+    </h2>
+  </div>
+</Counter>"
+`;
+
+exports[`Testing Counter Component should render correctly 2`] = `
+"<Counter count={20}>
+  <div className=\\"Counter\\">
+    <h2>
+      Voc� tem 
+      20
+       counters;
+    </h2>
+  </div>
+</Counter>"
+`;
