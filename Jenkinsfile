@@ -24,9 +24,9 @@ pipeline {
             sh 'npm run test'
           }
           post {
-            always {
-              junit 'junit.xml'
-            }
+                  always {
+                    step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
+                  }
           }
         }
       }
@@ -35,19 +35,4 @@ pipeline {
   tools {
     nodejs 'NodeJS'
   }
-}
-
-def uploadArtifact(server) {
-  def uploadSpec = """{
-            "files": [
-              {
-                "pattern": "continuous-test-code-coverage-guide*.tgz",
-                "target": "npm-stable/"
-              }
-           ]
-          }"""
-  server.upload(uploadSpec)
-  def buildInfo = Artifactory.newBuildInfo()
-  server.upload spec: uploadSpec, buildInfo: buildInfo
-  server.publishBuildInfo buildInfo
 }
