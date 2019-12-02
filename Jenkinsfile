@@ -18,14 +18,14 @@ pipeline {
       }
       post {
         always {
-          step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
+          step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
         }
       }
     }
     stage('Build') {
       steps {
         script {
-          sh 'npm build'
+          sh 'npm run build'
           sh 'npm pack'
         }
       }
