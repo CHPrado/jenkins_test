@@ -1,7 +1,8 @@
 pipeline {
+  agent any
   tools {
-      nodejs 'default-nodejs'
-    }
+    nodejs 'default-nodejs'
+  }
   stages {
     stage('Startup') {
       steps {
@@ -21,6 +22,5 @@ pipeline {
         sh 'npm pack'
       }
     }
-
   }
 }
