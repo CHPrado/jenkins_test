@@ -67,7 +67,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "jest --coverage --coverageDirectory=build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -99,6 +99,13 @@
     "setupFilesAfterEnv": [],
     "testMatch": [
       "<rootDir>/**/?(*.)(spec|test).{js,jsx,ts,tsx}"
+    ],
+    "coverageReporters": [
+      "text"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
     ],
     "testEnvironment": "jest-environment-jsdom-fourteen",
     "transform": {
@@ -132,6 +139,10 @@
       "jest-watch-typeahead/testname"
     ]
   },
+  "jest-junit": {
+    "output": "build/junit.xml",
+    "usePathForSuiteName": "true"
+  },
   "babel": {
     "presets": [
       "react-app"
@@ -140,6 +151,7 @@
   "devDependencies": {
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
+    "jest-junit": "^10.0.0",
     "react-test-renderer": "^16.12.0"
   }
 }

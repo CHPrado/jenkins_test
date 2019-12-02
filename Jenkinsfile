@@ -23,6 +23,11 @@ pipeline {
           steps {
             sh 'npm run test'
           }
+          post {
+            always {
+              junit 'build/junit.xml'
+            }
+          }
         }
       }
     }
@@ -30,4 +35,19 @@ pipeline {
   tools {
     nodejs 'NodeJS'
   }
+}
+
+def uploadArtifact(server) {
+  def uploadSpec = """{
+            "files": [
+              {
+                "pattern": "continuous-test-code-coverage-guide*.tgz",
+                "target": "npm-stable/"
+              }
+           ]
+          }"""
+  server.upload(uploadSpec)
+  def buildInfo = Artifactory.newBuildInfo()
+  server.upload spec: uploadSpec, buildInfo: buildInfo
+  server.publishBuildInfo buildInfo
 }
