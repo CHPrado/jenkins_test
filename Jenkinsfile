@@ -27,6 +27,7 @@ pipeline {
           }
         }
       }
+    }
   }
   tools {
     nodejs 'latest'
