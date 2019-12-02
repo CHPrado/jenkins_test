@@ -1,32 +1,41 @@
 pipeline {
-  agent {
-        docker {
-            image 'node:6-alpine'
-            args '-p 3000:3000'
-        }
-    }
-  environment {
-        CI = 'true' 
-    }
+  agent any
   stages {
-    stage('Startup') {
+    stage('Preflight') {
       steps {
+        echo sh(returnStdout: true, script: 'env')
+        sh 'node -v'
+      }
+    }
+    stage('Build') {
+      steps {
+        sh 'npm --version'
+        sh 'git log --reverse -1'
         sh 'npm install'
       }
     }
-
-    stage('Test') {
-      steps {
-        sh 'npm run test'
+    stage('Unit Test') {
+      parallel {
+        stage('webpack') {
+          steps {
+            sh 'npm run build'
+          }
+        }
+        stage('Testing') {
+          steps {
+            sh 'npm run test'
+            junit 'coverage/junit.xml'
+          }
+        }
+        stage('Coverage') {
+          steps {
+            sh 'npm run test -- --coverage'
+            cobertura(autoUpdateHealth: true, autoUpdateStability: true, coberturaReportFile: '**/coverage/cobertura-coverage.xml', failNoReports: true, classCoverageTargets: '70', lineCoverageTargets: '80', fileCoverageTargets: '90', sourceEncoding: 'ASCII', conditionalCoverageTargets: '70')
+          }
+        }
       }
-    }
-
-    stage('Build') {
-      steps {
-        sh 'npm start'
-        sh 'npm pack'
-      }
-    }
-
+  }
+  tools {
+    nodejs 'latest'
   }
 }
