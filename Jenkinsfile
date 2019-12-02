@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'node'
+    }
+
+  }
   stages {
     stage('Startup') {
       steps {
@@ -19,5 +24,6 @@ pipeline {
         sh 'npm pack'
       }
     }
+
   }
 }
