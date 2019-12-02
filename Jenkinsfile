@@ -24,13 +24,6 @@ pipeline {
         stage('Testing') {
           steps {
             sh 'npm run test'
-            junit 'coverage/junit.xml'
-          }
-        }
-        stage('Coverage') {
-          steps {
-            sh 'npm run test -- --coverage'
-            cobertura(autoUpdateHealth: true, autoUpdateStability: true, coberturaReportFile: '**/coverage/cobertura-coverage.xml', failNoReports: true, classCoverageTargets: '70', lineCoverageTargets: '80', fileCoverageTargets: '90', sourceEncoding: 'ASCII', conditionalCoverageTargets: '70')
           }
         }
       }
