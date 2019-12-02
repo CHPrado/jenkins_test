@@ -3,7 +3,6 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh "apk add nodejs"
         sh 'npm --version'
         sh 'git log --reverse -1'
         sh 'npm install'
@@ -23,5 +22,8 @@ pipeline {
         }
       }
     }
+  }
+  tools {
+    nodejs 'NodeJS'
   }
 }
