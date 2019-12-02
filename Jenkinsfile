@@ -4,7 +4,7 @@ pipeline {
           CI = 'true'
   }
   stages {
-    stage('Build') {
+    stage('Startup') {
       steps {
         sh "apk add nodejs"
         sh 'npm --version'
@@ -12,22 +12,21 @@ pipeline {
         sh 'npm install'
       }
     }
-    stage('Unit Test') {
-      parallel {
-        stage('webpack') {
-          steps {
-            sh 'npm run build'
-          }
+    stage('Test') {
+      steps {
+        sh 'npm run test'
+      }
+      post {
+        always {
+          step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
         }
-        stage('Testing') {
-          steps {
-            sh 'npm run test'
-          }
-          post {
-                  always {
-                    step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
-                  }
-          }
+      }
+    }
+    stage('Build') {
+      steps {
+        script {
+          sh 'npm start'
+          sh 'npm pack'
         }
       }
     }
