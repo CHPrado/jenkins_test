@@ -1,12 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Preflight') {
-      steps {
-        echo sh(returnStdout: true, script: 'env')
-        sh 'node -v'
-      }
-    }
     stage('Build') {
       steps {
         sh 'npm --version'
