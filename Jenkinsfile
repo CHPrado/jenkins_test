@@ -30,6 +30,6 @@ pipeline {
     }
   }
   tools {
-    nodejs 'latest'
+    nodejs 'NodeJS'
   }
 }
