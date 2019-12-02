@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  tools {
-    nodejs 'default-nodejs'
-  }
   stages {
     stage('Startup') {
       steps {
