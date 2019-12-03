@@ -104,6 +104,10 @@
       "text",
       "cobertura"
     ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
     "testEnvironment": "jest-environment-jsdom-fourteen",
     "transform": {
       "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
@@ -135,6 +139,10 @@
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"
     ]
+  },
+  "jest-junit": {
+    "output": "./output/coverage/junit/junit.xml",
+    "usePathForSuiteName": "true"
   },
   "babel": {
     "presets": [
