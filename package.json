@@ -141,8 +141,8 @@
     ]
   },
   "jest-junit": {
-    "output": "./output/coverage/junit/junit.xml",
-    "usePathForSuiteName": "true"
+    "usePathForSuiteName": "true",
+    "outputDirectory": "output/coverage/junit/"
   },
   "babel": {
     "presets": [
