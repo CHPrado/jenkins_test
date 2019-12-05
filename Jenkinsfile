@@ -19,8 +19,7 @@ pipeline {
       }
       post {
         always {
-          step([$class: 'hudson.plugins.checkstyle.CheckStylePublisher', checkstyle: 'output/lint/eslint.xml'])
-          checkstyle pattern: 'output/lint/eslint.xml'
+          recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'output/lint/eslint.xml')
           junit 'output/coverage/junit.xml'
           cobertura coberturaReportFile: 'output/coverage/cobertura-coverage.xml'
         }
