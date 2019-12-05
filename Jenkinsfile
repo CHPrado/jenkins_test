@@ -16,7 +16,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'npm run test'
-        sh 'npm run coverage'
+        sh 'npm run lint'
       }
       post {
         always {
