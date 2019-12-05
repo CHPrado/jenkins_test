@@ -4,7 +4,7 @@ exports[`Testing Counter Component should render correctly 1`] = `
 "<Counter count={5}>
   <div className=\\"Counter\\">
     <h2>
-      Voc� tem 
+      Você tem 
       5
        counters;
     </h2>
@@ -13,11 +13,11 @@ exports[`Testing Counter Component should render correctly 1`] = `
 `;
 
 exports[`Testing Counter Component should render correctly 2`] = `
-"<Counter count={20}>
+"<Counter count={40}>
   <div className=\\"Counter\\">
     <h2>
-      Voc� tem 
-      20
+      Você tem 
+      40
        counters;
     </h2>
   </div>
