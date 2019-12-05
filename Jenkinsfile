@@ -6,7 +6,6 @@ pipeline {
   stages {
     stage('Startup') {
       steps {
-        sh "npm config set scripts-prepend-node-path true"
         sh "apk add nodejs"
         sh 'npm --version'
         sh 'git log --reverse -1'
@@ -16,6 +15,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'npm run test'
+        sh 'npm run-script --silent lint'
       }
       post {
         always {
