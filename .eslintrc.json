@@ -1,0 +1,46 @@
+{
+    "env": {
+        "browser": true,
+        "jest": true,
+        "es6": true
+    },
+
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+
+    "plugins": ["react", "@typescript-eslint", "import", "prettier"],
+    "rules": {
+        "prettier/prettier": "error",
+        "react/jsx-first-props-per-line": "off",
+        "react/jsx-filename-extension": [
+            "error",
+            {
+                "extensions": [".js", ".jsx", ".tsx"]
+            }
+        ],
+        "global-require": "off",
+        "import/prefer-default-export": "off",
+        "no-unused-expressions": ["error", { "allowTaggedTemplates": true }]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}
