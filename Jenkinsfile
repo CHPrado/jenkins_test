@@ -15,12 +15,11 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'npm i -g eslint'
         sh 'npm run test'
-        sh 'npm run lint'
       }
       post {
         always {
+          step([$class: 'hudson.plugins.checkstyle.CheckStylePublisher', checkstyle: 'output/lint/eslint.xml'])
           checkstyle pattern: 'output/lint/eslint.xml'
           junit 'output/coverage/junit.xml'
           cobertura coberturaReportFile: 'output/coverage/cobertura-coverage.xml'
