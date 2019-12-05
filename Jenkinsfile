@@ -15,6 +15,7 @@ pipeline {
     }
     stage('Test') {
       steps {
+        sh 'npm i -g eslint'
         sh 'npm run test'
         sh 'npm run lint'
       }
