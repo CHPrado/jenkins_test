@@ -14,10 +14,12 @@ pipeline {
     }
     stage('Test') {
       steps {
+        sh 'npm run lint'
         sh 'npm run test'
       }
       post {
         always {
+          checkstyle pattern: 'output/lint/eslint.xml'
           junit 'output/coverage/junit.xml'
           cobertura coberturaReportFile: 'output/coverage/cobertura-coverage.xml'
         }
