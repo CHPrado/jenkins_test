@@ -15,7 +15,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'npm run test'
-        sh 'npm run-script --silent lint'
+        sh 'npm run-script lint'
       }
       post {
         always {
