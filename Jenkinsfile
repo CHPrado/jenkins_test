@@ -25,7 +25,9 @@ pipeline {
     stage('Testes') {
       parallel {
         stage('ESLint') {
-          sh 'npm run-script lint'
+          steps {
+            sh 'npm run-script lint'
+          }
         }
         stage('Testes Dinâmicos') {
           steps {
@@ -36,9 +38,11 @@ pipeline {
       post {
         always {
           stage('Gerando Relatórios'){
-            recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'output/lint/eslint.xml')
-            junit 'output/coverage/junit.xml'
-            cobertura coberturaReportFile: 'output/coverage/cobertura-coverage.xml'
+            steps {
+              recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'output/lint/eslint.xml')
+              junit 'output/coverage/junit.xml'
+              cobertura coberturaReportFile: 'output/coverage/cobertura-coverage.xml'
+            }
           }
         }
       }
