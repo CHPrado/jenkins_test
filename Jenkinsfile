@@ -37,13 +37,9 @@ pipeline {
       }
       post {
         always {
-          stage('Gerando Relatórios'){
-            steps {
-              recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'output/lint/eslint.xml')
-              junit 'output/coverage/junit.xml'
-              cobertura coberturaReportFile: 'output/coverage/cobertura-coverage.xml'
-            }
-          }
+          recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'output/lint/eslint.xml')
+          junit 'output/coverage/junit.xml'
+          cobertura coberturaReportFile: 'output/coverage/cobertura-coverage.xml'
         }
       }
     }
